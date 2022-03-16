@@ -185,6 +185,32 @@ class interval(with_metaclass(Metaclass, tuple)):
         return cls._canonical(c for i in intervals for c in i)
 
     @classmethod
+    def closed_difference(cls, intervals):
+        """Return the difference between the specified intervals.
+
+        >>> interval.closed_difference([interval[1, 5], interval[2, 4]])
+        interval([1.0, 2.0], [4.0, 5.0])
+        """
+        from functools import reduce
+
+        def closed_difference(i1, i2):
+            for c2 in i2:
+                l = []
+                for c in i1:
+                    if c.sup <= c2.inf or c2.sup <= c.inf:
+                        l.append(c)
+                        continue
+                    if c.inf <= c2.inf <= c.sup:
+                        l.append(cls.Component(c.inf, c2.inf))
+                    if c.inf <= c2.sup <= c.sup:
+                        l.append(cls.Component(c2.sup, c.sup))
+                i1 = cls.new(l)
+            return i1
+
+        return reduce(lambda acc, i: closed_difference(acc, i), intervals)
+
+
+    @classmethod
     def hull(cls, intervals):
         """Return the hull of the specified intervals.
 
