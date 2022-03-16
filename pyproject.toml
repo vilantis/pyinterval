@@ -3,6 +3,9 @@ name = "pyinterval"
 version = "1.2.1.dev0"
 description = "Interval arithmetic in Python"
 authors = ["Stefano Taschini <taschini@gmail.com>"]
+packages = [
+  { include = "interval" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
