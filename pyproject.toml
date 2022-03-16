@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "pyinterval"
+version = "1.2.1.dev0"
+description = "Interval arithmetic in Python"
+authors = ["Stefano Taschini <taschini@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+crlibm = ">=1.0.3,==1.*"
+six = ">=1.10"
+
+[tool.poetry.dev-dependencies]
+Sphinx = "^4.4.0"
+flake8 = "^4.0.1"
+pytest-cov = "^3.0.0"
+tox = "^3.24.5"
+"zest.releaser" = {extras = ["recommended"], version = "^6.22.2"}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
